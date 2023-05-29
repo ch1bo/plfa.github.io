@@ -890,7 +890,17 @@ just apply the previous results which show addition
 is associative and commutative.
 
 ```agda
--- Your code goes here
++-swap : ∀ (m n p : ℕ) → m + (n + p) ≡ n + (m + p)
++-swap m n p =
+  begin
+    m + (n + p)
+  ≡⟨ sym (+-assoc m n p) ⟩
+    (m + n) + p
+  ≡⟨ cong (_+ p) (+-comm m n) ⟩
+    (n + m) + p
+  ≡⟨ +-assoc n m p ⟩
+    n + (m + p)
+  ∎
 ```
 
 
@@ -903,7 +913,16 @@ Show multiplication distributes over addition, that is,
 for all naturals `m`, `n`, and `p`.
 
 ```agda
--- Your code goes here
+*-distrib-+ : ∀ m n p → (m + n) * p ≡ m * p + n * p
+*-distrib-+ zero n p = refl
+*-distrib-+ (suc m) n p =
+  begin
+    p + (m + n) * p
+  ≡⟨ cong (p +_) (*-distrib-+ m n p) ⟩
+    p + (m * p + n * p)
+  ≡⟨ sym (+-assoc p (m * p) (n * p)) ⟩
+    p + m * p + n * p
+  ∎
 ```
 
 
