@@ -238,7 +238,8 @@ Show that `A ⇔ B` as defined [earlier](/Isomorphism/#iff)
 is isomorphic to `(A → B) × (B → A)`.
 
 ```agda
--- Your code goes here
+⇔≃× : ∀ {A : Set} {B : Set} → A ⇔ B ≃ (A → B) × (B → A)
+⇔≃× = {!!}
 ```
 
 

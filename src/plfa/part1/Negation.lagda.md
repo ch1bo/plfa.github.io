@@ -98,7 +98,7 @@ We cannot show that `¬ ¬ A` implies `A`, but we can show that
   → ¬ ¬ ¬ A
     -------
   → ¬ A
-¬¬¬-elim ¬¬¬x  =  λ x → ¬¬¬x (¬¬-intro x)
+¬¬¬-elim ¬¬¬x  =  λ x → ¬¬¬x (λ z → z x)
 ```
 Let `¬¬¬x` be evidence of `¬ ¬ ¬ A`. We will show that assuming
 `A` leads to a contradiction, and hence `¬ A` must hold.
@@ -114,7 +114,7 @@ contraposition : ∀ {A B : Set}
   → (A → B)
     -----------
   → (¬ B → ¬ A)
-contraposition f ¬y x = ¬y (f x)
+contraposition f = λ ¬y → λ x → ¬y (f x)
 ```
 Let `f` be evidence of `A → B` and let `¬y` be evidence of `¬ B`.  We
 will show that assuming `A` leads to a contradiction, and hence `¬ A`
