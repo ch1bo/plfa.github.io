@@ -239,7 +239,13 @@ is isomorphic to `(A → B) × (B → A)`.
 
 ```agda
 ⇔≃× : ∀ {A : Set} {B : Set} → A ⇔ B ≃ (A → B) × (B → A)
-⇔≃× = {!!}
+⇔≃× =
+  record
+    { to      = λ x → ⟨ _⇔_.to x , _⇔_.from x ⟩
+    ; from    = λ { ⟨ x , y ⟩ → record { to = x ; from = y } }
+    ; from∘to = λ x → refl
+    ; to∘from = λ { ⟨ _ , _ ⟩ → refl}
+    }
 ```
 
 
