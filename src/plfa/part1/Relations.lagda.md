@@ -91,10 +91,24 @@ And here is the corresponding Agda proof:
 ```agda
 _ : 2 ≤ 4
 _ = s≤s (s≤s z≤n)
+
+data Bool : Set where
+  true : Bool
+  false : Bool
+
+_≤?_ : ℕ → ℕ → Bool
+zero ≤? n = true
+suc m ≤? zero = false
+suc m ≤? suc n = m ≤? n
+
+lemma : ∀ {m n : ℕ} → (m ≤? n) ≡ true → m ≤ n
+lemma {zero} {n} refl = z≤n
+lemma {suc m} {suc n} e = s≤s (lemma e)
+
+lemma2 : ∀ {m n : ℕ} → m ≤ n → (m ≤? n) ≡ true
+lemma2 z≤n = refl
+lemma2 (s≤s m≤n) = lemma2 m≤n
 ```
-
-
-
 
 ## Implicit arguments
 
