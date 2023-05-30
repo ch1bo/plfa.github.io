@@ -622,7 +622,7 @@ exercise exploits the relation between < and ≤.)
         -------
         → m < p
 <-trans z<s (s<s _) = z<s
-<-trans (s<s a<b) (s<s x<y) = s<s (<-trans a<b x<y)
+<-trans (s<s a<b) (s<s b<c) = s<s (<-trans a<b b<c)
 ```
 
 #### Exercise `trichotomy` (practice) {#trichotomy}
@@ -657,7 +657,13 @@ As with inequality, some additional definitions may be required.
 Show that `suc m ≤ n` implies `m < n`, and conversely.
 
 ```agda
--- Your code goes here
+≤→< : ∀ {m n : ℕ} → suc m ≤ n → m < n
+≤→< (s≤s z≤n) = z<s
+≤→< (s≤s (s≤s a≤b)) = s<s (≤→< (s≤s a≤b))
+
+<→≤ : ∀ {m n : ℕ} → m < n → suc m ≤ n
+<→≤ z<s = s≤s z≤n
+<→≤ (s<s a<b) = s≤s (<→≤ a<b)
 ```
 
 #### Exercise `<-trans-revisited` (practice) {#less-trans-revisited}
