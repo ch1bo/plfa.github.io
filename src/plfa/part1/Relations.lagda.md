@@ -614,7 +614,15 @@ Show that strict inequality is transitive. Use a direct proof. (A later
 exercise exploits the relation between < and ≤.)
 
 ```agda
--- Your code goes here
+-- Remember to try very hard no to pattern match on the individual variables,
+-- but instead the proofs directly.
+<-trans : ∀ {m n p : ℕ}
+        → m < n
+        → n < p
+        -------
+        → m < p
+<-trans z<s (s<s _) = z<s
+<-trans (s<s a<b) (s<s x<y) = s<s (<-trans a<b x<y)
 ```
 
 #### Exercise `trichotomy` (practice) {#trichotomy}
